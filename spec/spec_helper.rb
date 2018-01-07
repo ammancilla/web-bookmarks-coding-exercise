@@ -1,7 +1,6 @@
 RSpec.configure do |config|
-  config.shared_context_metadata_behavior = :apply_to_host_groups
-
   config.filter_run_when_matching :focus
+  config.include FactoryGirl::Syntax::Methods
   config.order = :random
   config.profile_examples = 5
 
