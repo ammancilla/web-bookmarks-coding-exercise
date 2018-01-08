@@ -1,5 +1,9 @@
-<h1>Edit a Bookmark</h1>
+<div class="row">
+  <div class="col-md-offset-4 col-md-4">
+    <h2>Edit Bookmark</h2>
+    <%= render partial: 'form', locals: { bookmark: @bookmark } %>
 
-<%= render partial: 'form', locals: { bookmark: @bookmark } %>
-
-<%= link_to 'Home', :root %>
+    <br><hr>
+    <%= link_to 'Return', :root %>
+  </div>
+</div>

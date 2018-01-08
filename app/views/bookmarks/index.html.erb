@@ -1,20 +1,13 @@
-<table>
+<table class="table table-striped table-bordered table-rounded">
   <thead>
     <tr>
       <th>Title</th>
       <th>URL</th>
       <th>Shortening</th>
+      <th colspan="2"></th>
     </tr>
   </thead>
   <tbody>
-    <% @bookmarks.each do |bookmark| %>
-      <tr>
-        <td><%= bookmark.title %></td>
-        <td><%= bookmark.url %></td>
-        <td><%= bookmark.shortening %></td>
-        <td><%= link_to "Edit", edit_bookmark_path(bookmark) %></td>
-        <td><%= link_to "Remove", bookmark_path(bookmark), method: :delete, data: { confirm: 'are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <%= render @bookmarks %>
   </tbody>
 </table>

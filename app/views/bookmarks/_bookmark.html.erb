@@ -1,0 +1,7 @@
+<tr>
+  <td><%= bookmark.title %></td>
+  <td><%= link_to bookmark.url, bookmark.url %></td>
+  <td><%= link_to bookmark.shortening, bookmark.shortening %></td>
+  <td><%= link_to 'Edit', edit_bookmark_path(bookmark) %></td>
+  <td><%= link_to 'Remove', bookmark_path(bookmark), method: :delete, data: { confirm: 'are you sure?' } %></td>
+</tr>

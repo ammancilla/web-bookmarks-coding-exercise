@@ -1,10 +1,10 @@
-<%= form_for @bookmark do |f| %>
+<%= form_for @bookmark, html: { class: 'form' } do |f| %>
   <% if @bookmark.errors.any? %>
-    <div>
-      <h2>
+    <div class="alert alert-danger">
+      <h4>
         <%= pluralize(@bookmark.errors.count, "error") %> prohibited
         this bookmark from being saved:
-      </h2>
+      </h4>
       <ul>
         <% @bookmark.errors.full_messages.each do |msg| %>
           <li><%= msg %></li>
@@ -13,23 +13,20 @@
     </div>
   <% end %>
 
-  <div>
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="form-group">
+    <%= label_tag :title, 'Title', class: 'sr-only' %>
+    <%= f.text_field :title, placeholder: 'Title', class: 'form-control ' %>
   </div>
 
-  <br>
-  <div>
-    <%= f.label :url %><br>
-    <%= f.url_field :url %>
+  <div class="form-group">
+    <%= label_tag :url, 'url', class: 'sr-only' %>
+    <%= f.url_field :url, placeholder: 'Url', class: 'form-control' %>
   </div>
 
-  <br>
-  <div>
-    <%= f.label :shortening %><br>
-    <%= f.url_field :shortening %>
+  <div class="form-group">
+    <%= label_tag :shortening, 'Shortening', class: 'sr-only' %>
+    <%= f.url_field :shortening, placeholder: 'Shortening', class: 'form-control' %>
   </div>
 
-  <br>
-  <%= submit_tag 'Save' %>
+  <%= submit_tag 'Save', class: 'btn btn-primary' %>
 <% end %>
