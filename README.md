@@ -1,24 +1,43 @@
-# README
+# Web Bookmarks
+Solution to a coding exercise given by XXX company.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Development
+I recommend running this project with docker. To get started, follow the instructions bellow.
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+ 1. **Docker**
+    Install docker following the instructions from the [official docker page](https://docs.docker.com/engine/installation/):
+     - [For Mac](https://docs.docker.com/docker-for-mac/install)
+     - [For Windows](https://docs.docker.com/docker-for-windows/install)
 
-* System dependencies
+ And that's it!
 
-* Configuration
+## Running the app
+#### 1. Clone the repository
 
-* Database creation
+```bash
+> git clone git@github.com:ammancilla/web-bookmarks-coding-exercise.git
+```
 
-* Database initialization
+#### 2. Go to the project folder
 
-* How to run the test suite
+```bash
+> cd /path/to/project-folder
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+#### 3. Build the project docker image
 
-* Deployment instructions
+```
+> docker/build
+```
 
-* ...
+#### 5. Start the application
+```
+docker/server
+```
+
+#### 6. Have fun!
+```
+localhost:3000
+```
