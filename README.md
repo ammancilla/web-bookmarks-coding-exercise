@@ -1,19 +1,20 @@
 # Web Bookmarks
 Solution to a coding exercise given by XXX company.
 
-# Development
+## Development
 I recommend running this project with docker. To get started, follow the instructions bellow.
 
-## Prerequisites
+### Prerequisites
 
  1. **Docker**
+
     Install docker following the instructions from the [official docker page](https://docs.docker.com/engine/installation/):
-     - [For Mac](https://docs.docker.com/docker-for-mac/install)
-     - [For Windows](https://docs.docker.com/docker-for-windows/install)
+      - [For Mac](https://docs.docker.com/docker-for-mac/install)
+      - [For Windows](https://docs.docker.com/docker-for-windows/install)
 
  And that's it!
 
-## Running the app
+### Running the app
 #### 1. Clone the repository
 
 ```bash
@@ -28,16 +29,17 @@ I recommend running this project with docker. To get started, follow the instruc
 
 #### 3. Build the project docker image
 
-```
+```bash
 > docker/build
 ```
 
 #### 5. Start the application
-```
+
+```bash
 docker/server
 ```
 
 #### 6. Have fun!
-```
-localhost:3000
-```
+
+Visit [localhost:3000](localhost:3000) in your prefered browser.
+
