@@ -9,15 +9,24 @@
   </head>
 
   <body>
-    <h1>Web Bookmarks</h1>
-    <h3>Save a Bookmark</h3>
+    <div class='container-fluid'>
+      <div class="row">
+        <div class="col-md-3">
+          <h3>New Bookmark</h3>
+          <%= render partial: 'bookmarks/form', locals: { bookmark: @bookmark } %>
+        </div>
 
-    <%= render partial: 'form', locals: { bookmark: @bookmark } %>
+        <div class="col-md-9 searchbox">
+          <br>
+          <%= render_flash_messages %>
 
-    <br><br><hr><br>
+          <h3 align="center">Search Bookmarks</h3>
+          <%= render partial: 'searches/form' %>
+          <br><hr><br>
 
-    <h3>Find Bookmarks</h3>
-
-    <%= yield %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
