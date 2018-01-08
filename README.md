@@ -39,7 +39,13 @@ I recommend running this project with docker. To get started, follow the instruc
 docker/server
 ```
 
-#### 6. Have fun!
+#### 6. Run the migrations
 
-Visit [localhost:3000](localhost:3000) in your prefered browser.
+```bash
+docker/migrate
+```
+
+#### 7. Have fun!
+
+Visit [localhost:3000](http://localhost:3000) in your prefered browser.
 
