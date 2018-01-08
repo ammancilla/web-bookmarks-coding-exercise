@@ -1,11 +1,13 @@
 class Bookmark < ApplicationRecord
   # External
-  include UrlHandler
+  include UrlAttributes
+
+  url_attributes :url, :shortening
 
   # Associations
   belongs_to :site, counter_cache: true
+  accepts_nested_attributes_for :site
 
   # Validations
-  validates :title, presence: true
-  validates :shortening, format: { with: URI.regexp( %w(http https) ) }, allow_blank: true
+  validates :title, :url, presence: true
 end
