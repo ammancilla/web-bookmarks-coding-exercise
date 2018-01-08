@@ -1,4 +1,6 @@
 class BookmarksController < ApplicationController
+  layout 'simple', only: :edit
+
   before_action :find_bookmark, except: [:index, :create]
 
   def index
@@ -24,7 +26,7 @@ class BookmarksController < ApplicationController
     if @bookmark.save
       redirect_to :root, notice: 'Bookmark updated :)'
     else
-      render :edit
+      render :edit, layout: 'simple'
     end
   end
 
@@ -43,7 +45,7 @@ class BookmarksController < ApplicationController
   end
 
   def load_recent_bookmarks
-    @bookmarks = Bookmark.order(created_at: :desc)
+    @bookmarks = Bookmark.recents
   end
 
   def bookmark_params
