@@ -1,0 +1,35 @@
+<%= form_for @bookmark do |f| %>
+  <% if @bookmark.errors.any? %>
+    <div>
+      <h2>
+        <%= pluralize(@bookmark.errors.count, "error") %> prohibited
+        this bookmark from being saved:
+      </h2>
+      <ul>
+        <% @bookmark.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+
+  <br>
+  <div>
+    <%= f.label :url %><br>
+    <%= f.url_field :url %>
+  </div>
+
+  <br>
+  <div>
+    <%= f.label :shortening %><br>
+    <%= f.url_field :shortening %>
+  </div>
+
+  <br>
+  <%= submit_tag 'Save' %>
+<% end %>
