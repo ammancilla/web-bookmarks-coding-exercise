@@ -1,6 +1,8 @@
+require 'factory_bot'
+
 RSpec.configure do |config|
   config.filter_run_when_matching :focus
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
   config.order = :random
   config.profile_examples = 5
 
