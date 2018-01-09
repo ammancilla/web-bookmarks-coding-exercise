@@ -20,7 +20,6 @@ shared_examples_for 'class with URL attributes' do |attrs_names|
             expect(instance.errors.messages[attr][0]).to match(/already been taken/)
           end
         end
-
       end
     end
 
@@ -35,7 +34,6 @@ shared_examples_for 'class with URL attributes' do |attrs_names|
             expect(instance.errors.messages[attr][0]).to match(/is invalid/)
           end
         end
-
       end
     end
   end
