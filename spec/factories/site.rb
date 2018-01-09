@@ -10,7 +10,7 @@ FactoryBot.define do
       end
 
       after(:create) do |site, evaluator|
-        evaluator.bookmarks_count.each_with_index do |b, i|
+        1.upto(evaluator.bookmarks_count).each_with_index do |b, i|
           bookmark_url = "#{site.url}/#{Faker::Internet.slug}-#{i}"
           create(:bookmark, site: site, url: bookmark_url)
         end
