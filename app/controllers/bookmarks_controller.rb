@@ -49,20 +49,6 @@ class BookmarksController < ApplicationController
   end
 
   def bookmark_params
-    bookmark_attrs = params.require(:bookmark).permit(:title, :url, :shortening)
-
-    return bookmark_attrs if bookmark_attrs[:url].blank?
-
-    uri = URI.parse( bookmark_attrs[:url] )
-    site_url = "#{uri.scheme}://#{uri.hostname}"
-    site = Site.find_by(url: site_url)
-
-    if site.present?
-      bookmark_attrs[:site] = site
-    else
-      bookmark_attrs[:site_attributes] = { url: site_url }
-    end
-
-    bookmark_attrs
+    params.require(:bookmark).permit(:title, :url, :shortening)
   end
 end
