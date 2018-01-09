@@ -1,7 +1,7 @@
 class Site < ApplicationRecord
-  # External
   include UrlAttributes
 
+  # External
   url_attributes :url
 
   # Enums
