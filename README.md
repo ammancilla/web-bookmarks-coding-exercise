@@ -49,3 +49,9 @@ docker/migrate
 
 Visit [localhost:3000](http://localhost:3000) in your prefered browser.
 
+### Testing
+To run the test suite execute:
+
+```bash
+docker/rspec
+```
