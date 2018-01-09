@@ -1,15 +1,17 @@
 class Bookmark < ApplicationRecord
-  # External
   include UrlAttributes
 
+  # External
   url_attributes :url, :shortening
 
   # Associations
   belongs_to :site, counter_cache: true
-  accepts_nested_attributes_for :site
 
   # Validations
   validates :title, :url, presence: true
+
+  # Callbacks
+  before_validation :assign_site
 
   # Scopes
   scope :recents, -> { order(created_at: :desc) }
@@ -27,5 +29,11 @@ class Bookmark < ApplicationRecord
 
       chain.send(scope_name, scope_param)
     end
+  end
+
+  private
+
+  def assign_site
+    self.site = Site.find_or_create_by(url: url)
   end
 end
