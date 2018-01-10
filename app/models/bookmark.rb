@@ -17,11 +17,11 @@ class Bookmark < ApplicationRecord
   scope :recents, -> { order(created_at: :desc) }
   scope :title, -> (title) { where("title LIKE ?", "%#{title}%") }
   scope :url, -> (url) { where("url LIKE ?", "%#{url}%") }
-  scope :shortening, -> (shortening) { where("title LIKE ?'", "%#{shortening}%") }
+  scope :shortening, -> (shortening) { where("shortening LIKE ?", "%#{shortening}%") }
 
   # Methods
   def self.chain_scopes(scopes)
-    return [] if scopes.blank?
+    return if scopes.blank?
 
     scopes.inject(self) do |chain, skope|
       scope_name, scope_param = skope[0], skope[1]
@@ -32,7 +32,10 @@ class Bookmark < ApplicationRecord
   private
 
   def assign_site
-    site_address = Site.address_from_url(url)
-    self.site = Site.find_or_create_by(url: site_address)
+    site_url = Site.address_from_url(url)
+
+    return if site_url.nil?
+
+    self.site = Site.find_or_create_by(url: site_url)
   end
 end
