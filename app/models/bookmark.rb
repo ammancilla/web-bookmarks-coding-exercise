@@ -1,31 +1,41 @@
 class Bookmark < ApplicationRecord
-  # External
   include UrlAttributes
 
+  # External
   url_attributes :url, :shortening
 
   # Associations
   belongs_to :site, counter_cache: true
-  accepts_nested_attributes_for :site
 
   # Validations
   validates :title, :url, presence: true
 
+  # Callbacks
+  before_validation :assign_site
+
   # Scopes
   scope :recents, -> { order(created_at: :desc) }
-  scope :by_title, -> (title) { where("title LIKE ?", "%#{title}%") }
-  scope :by_url, -> (url) { where("url LIKE ?", "%#{url}%") }
-  scope :by_shortening, -> (shortening) { where("title LIKE ?'", "%#{shortening}%") }
+  scope :title, -> (title) { where("title LIKE ?", "%#{title}%") }
+  scope :url, -> (url) { where("url LIKE ?", "%#{url}%") }
+  scope :shortening, -> (shortening) { where("shortening LIKE ?", "%#{shortening}%") }
 
   # Methods
   def self.chain_scopes(scopes)
-    return [] if scopes.blank?
+    return if scopes.blank?
 
     scopes.inject(self) do |chain, skope|
-      scope_name = "by_#{skope[0]}"
-      scope_param = skope[1]
-
+      scope_name, scope_param = skope[0], skope[1]
       chain.send(scope_name, scope_param)
     end
+  end
+
+  private
+
+  def assign_site
+    site_url = Site.address_from_url(url)
+
+    return if site_url.nil?
+
+    self.site = Site.find_or_create_by(url: site_url)
   end
 end

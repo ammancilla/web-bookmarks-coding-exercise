@@ -10,7 +10,7 @@ class SearchesController < ApplicationController
       if search_params.blank?
         Bookmark.recents
       else
-        Bookmark.chain_scopes( search_params )
+        Bookmark.chain_scopes(search_params)
       end
 
     render 'bookmarks/index'
