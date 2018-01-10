@@ -1,10 +1,12 @@
 require 'rails_helper'
-require 'models/concerns/url_attributes_spec'
+require 'models/concerns/url_attributes'
 
 describe Site, type: :model do
-  let!(:site) { create(:site, url: 'https://example.com/apolonio') }
+  it_behaves_like 'class with URL attributes', [:url]
 
   context 'callbacks' do
+    let!(:site) { create(:site, url: 'https://example.com/apolonio') }
+
     describe 'before_save: :format_attributes' do
       it 'assings :protocol' do
 	expect(site.protocol).to eq('https')
@@ -15,6 +17,4 @@ describe Site, type: :model do
       end
     end
   end
-
-  it_behaves_like 'class with URL attributes', [:url]
 end
