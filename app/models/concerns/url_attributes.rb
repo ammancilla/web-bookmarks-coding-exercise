@@ -15,7 +15,7 @@ module UrlAttributes
         attr_value = self.send(attr)
 
         if attr_value.present?
-          self.send("#{attr}=", attr_value.downcase)
+          self.send("#{attr}=", attr_value&.downcase)
         end
       end
     end
