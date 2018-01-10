@@ -4,9 +4,6 @@ class Site < ApplicationRecord
   # External
   url_attributes :url
 
-  # Enums
-  enum protocol: [ :http, :https ]
-
   # Associations
   has_many :bookmarks, dependent: :delete_all
 
@@ -14,14 +11,17 @@ class Site < ApplicationRecord
   validates :url, presence: true
 
   # Callbacks
-  before_save :format_attributes
+  before_save :format_url
 
   # Methods
+  def self.address_from_url(url)
+    uri = URI.parse(url)
+    "#{uri.scheme}://#{uri.host}"
+  end
+
   private
 
-  def format_attributes
-    uri = URI.parse(url)
-    self.protocol = uri.scheme
-    self.hostname = uri.hostname
+  def format_url
+    self.url = Site.address_from_url(url)
   end
 end

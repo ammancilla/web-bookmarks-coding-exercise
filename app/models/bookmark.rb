@@ -32,6 +32,7 @@ class Bookmark < ApplicationRecord
   private
 
   def assign_site
-    self.site = Site.find_or_create_by(url: url)
+    site_address = Site.address_from_url(url)
+    self.site = Site.find_or_create_by(url: site_address)
   end
 end
