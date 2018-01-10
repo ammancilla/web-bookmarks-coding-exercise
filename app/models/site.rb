@@ -1,14 +1,11 @@
 class Site < ApplicationRecord
-  include UrlAttributes
-
-  # External
-  url_attributes :url
-
   # Associations
   has_many :bookmarks, dependent: :delete_all
 
   # Validations
   validates :url, presence: true
+  validates :url, uniqueness: { case_sensitive: false }, allow_blank: true
+  validates :url, format: { with: URI.regexp( %w(http https) ) }, allow_blank: true
 
   # Callbacks
   before_validation :format_url
@@ -29,6 +26,8 @@ class Site < ApplicationRecord
   private
 
   def format_url
+    self.url = url&.downcase
+
     address = Site.address_from_url(url)
     self.url = address unless address.nil?
   end

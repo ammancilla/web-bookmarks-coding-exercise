@@ -1,17 +1,14 @@
 class Bookmark < ApplicationRecord
-  include UrlAttributes
-
-  # External
-  url_attributes :url, :shortening
-
   # Associations
   belongs_to :site, counter_cache: true
 
   # Validations
   validates :title, :url, presence: true
+  validates :url, :shortening, uniqueness: { case_sensitive: false }, allow_blank: true
+  validates :url, :shortening, format: { with: URI.regexp( %w(http https) ) }, allow_blank: true
 
   # Callbacks
-  before_validation :assign_site
+  before_validation :format_url_attributes, :assign_site
 
   # Scopes
   scope :recents, -> { order(created_at: :desc) }
@@ -37,5 +34,10 @@ class Bookmark < ApplicationRecord
     return if site_url.nil?
 
     self.site = Site.find_or_create_by(url: site_url)
+  end
+
+  def format_url_attributes
+    self.url = url&.downcase
+    self.shortening = shortening&.downcase
   end
 end

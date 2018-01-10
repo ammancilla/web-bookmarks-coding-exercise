@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'models/concerns/url_attributes'
 
 describe Bookmark, type: :model do
   context 'callbacks' do
@@ -35,6 +34,4 @@ describe Bookmark, type: :model do
 
     it { is_expected.to be_an(ActiveRecord::Relation)  }
   end
-
-  it_behaves_like 'class with URL attributes', [:url, :shortening]
 end
