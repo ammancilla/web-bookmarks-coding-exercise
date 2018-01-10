@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'models/concerns/url_attributes'
 
 describe Site, type: :model do
   let(:url) { 'http://ie.co/some/path' }
@@ -18,6 +17,4 @@ describe Site, type: :model do
 
     it { is_expected.to eq('http://ie.co') }
   end
-
-  it_behaves_like 'class with URL attributes', [:url]
 end
