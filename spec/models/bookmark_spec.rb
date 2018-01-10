@@ -2,13 +2,12 @@ require 'rails_helper'
 require 'models/concerns/url_attributes'
 
 describe Bookmark, type: :model do
-  it_behaves_like 'class with URL attributes', [:url, :shortening]
-
   context 'callbacks' do
     let(:site) { create(:site, url: 'http://apo.co') }
     let!(:bookmark) { build(:bookmark, url: 'http://apo.co/oinolopa') }
 
     describe 'before_validation: :assign_site' do
+
       it "creates a Site if it doesn't exists" do
         expect { bookmark.valid? }.to change { Site.count }.from(0).to(1)
       end
@@ -26,7 +25,7 @@ describe Bookmark, type: :model do
   end
 
   describe '.chain_scopes' do
-    let!(:query) { "SELECT \"bookmarks\".* FROM \"bookmarks\" WHERE (title LIKE '%test%') AND (url LIKE '%apo.co%')" }
+    let(:query) { "SELECT \"bookmarks\".* FROM \"bookmarks\" WHERE (title LIKE '%test%') AND (url LIKE '%apo.co%')" }
 
     subject { Bookmark.chain_scopes(title: 'test', url: 'apo.co') }
 
@@ -36,4 +35,6 @@ describe Bookmark, type: :model do
 
     it { is_expected.to be_an(ActiveRecord::Relation)  }
   end
+
+  it_behaves_like 'class with URL attributes', [:url, :shortening]
 end
