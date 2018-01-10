@@ -1,10 +1,9 @@
 require 'spec_helper'
 
 shared_examples_for 'class with URL attributes' do |attrs_names|
-
-  let(:class_name) { described_class.name.underscore.downcase.to_sym  }
-  let(:url) { 'https://example.com' }
-  let(:invalid_url) { 'example-invalid-url' }
+  let!(:class_name) { described_class.name.underscore.downcase.to_sym  }
+  let!(:url) { 'https://example.com' }
+  let!(:invalid_url) { 'example-invalid-url' }
 
   context 'validations' do
     context 'uniqueness' do
